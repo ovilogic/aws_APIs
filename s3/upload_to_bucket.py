@@ -1,5 +1,6 @@
 import boto3
-
+from botocore.exceptions import ClientError
+import logging
 
 def upload_file_to_s3(file_name, bucket, object_name=None):
 	""" Upload a file to an S3 bucket 
@@ -14,7 +15,7 @@ is used
 		object_name = file_name
 
 	# Upload this file
-	s3_client = boto3.client('s3', region_name=eu-north-1)
+	s3_client = boto3.client('s3', region_name='eu-north-1')
 	try:
 		response = s3_client.upload_file(file_name, bucket, object_name)
 	except ClientError as e:
